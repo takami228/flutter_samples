@@ -33,7 +33,10 @@ class _FirstScreenState extends State<FirstScreen> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Center(child: Text('Home Screen', style: TextStyle(fontSize: 24))),
+      body: Center(
+        child: Text('Home Screen',
+            style: TextStyle(fontSize: 24), key: ValueKey('firstScreenText')),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         items: <BottomNavigationBarItem>[
@@ -67,7 +70,7 @@ class SecondScreen extends StatelessWidget {
         title: Text("Next"),
       ),
       body: Center(
-        child: Text('$_value screen',
+        child: Text('$_value Screen',
             style: TextStyle(fontSize: 24), key: ValueKey('secondScreenText')),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -80,8 +83,8 @@ class SecondScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             title: Text('?'),
-            icon: Icon(Icons.android),
-          ),
+            icon: Icon(Icons.android, key: ValueKey('secondScreenNextButton')),
+          )
         ],
         onTap: (int value) {
           if (value == 0) Navigator.pop(context);

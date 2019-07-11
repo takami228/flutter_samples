@@ -2,7 +2,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Flutter Navigation', () {
+  group('Flutter Navigation Test', () {
     FlutterDriver driver;
 
     // Connect to the Flutter driver before running any tests.
@@ -22,14 +22,30 @@ void main() {
       print(health.status);
     });
 
-    test('input text and tap next then screen text', () async {
-      final textField = find.byValueKey('firstScreenTextField');
+    test('tap next, check text, tap next, check text', () async {
+      final firstScreenText = find.byValueKey('firstScreenText');
       final firstScreenNextButton = find.byValueKey('firstScreenNextButton');
       final secondScreenText = find.byValueKey('secondScreenText');
-      await driver.tap(textField);
-      await driver.enterText('Hello');
+      final secondScreenNextButton = find.byValueKey('secondScreenNextButton');
+
+      expect(await driver.getText(firstScreenText), 'Home Screen');
       await driver.tap(firstScreenNextButton);
-      expect(await driver.getText(secondScreenText), 'you typed: "Hello"');
+      expect(await driver.getText(secondScreenText), 'Second Screen');
+      await driver.tap(secondScreenNextButton);
+      expect(await driver.getText(secondScreenText), 'Third Screen');
     });
+
+//    test('tap next, check text, tap back, check text', () async {
+//      final firstScreenText = find.byValueKey('firstScreenText');
+//      final firstScreenNextButton = find.byValueKey('firstScreenNextButton');
+//      final secondScreenText = find.byValueKey('secondScreenText');
+//      final secondScreenBackButton = find.byValueKey('secondScreenBackButton');
+//
+//      expect(await driver.getText(firstScreenText), 'Home Screen');
+//      await driver.tap(firstScreenNextButton);
+//      expect(await driver.getText(secondScreenText), 'Second Screen');
+//      await driver.tap(secondScreenBackButton);
+//      expect(await driver.getText(firstScreenText), 'Home Screen');
+//    });
   });
 }

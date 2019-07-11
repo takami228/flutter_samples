@@ -1,0 +1,6 @@
+build:
+  stage: build
+  tags:
+    - macmini-ci-runner
+  script:
+    - ./flutter-ci.sh
